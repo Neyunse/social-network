@@ -25,6 +25,7 @@ class MarkDown extends React.Component {
         var user = str.match(pattern);
         this.setState({ text: this.props.string.replace(user, `[${user}](http://localhost:3000/u/${user})`) });
       } else if (this.props.string.includes("https://www.youtube.com/watch")) {
+        // if this.props.string return a youtube link then we need to parse it and return a embeded video.
         var str = this.props.string;
         var pattern = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         var video = str.match(pattern);
