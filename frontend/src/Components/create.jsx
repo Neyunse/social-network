@@ -231,7 +231,7 @@ class Create extends React.Component {
           <>
             <div className="modal-gif">
               <ReactGiphySearchbox
-                apiKey="9902SzcaqDP0iiFC0Aw55nLfmKztUTDt" // Required: get your on https://developers.giphy.com
+                apiKey={process.env.REACT_APP_GIPHY_KEY} // Required: get your on https://developers.giphy.com
                 onSelect={this.log.bind(this)}
               />
             </div>
