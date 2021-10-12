@@ -9,6 +9,7 @@ body {
 }
 .pos_fixed {
   position: fixed;
+  box-shadow: 0px 3px 1px 0px #b0b0b0;
 }
 #root {
   width: 100%;
