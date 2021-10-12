@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "post",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "body": {
+      "type": "richtext",
+      "maxLength": 280,
+      "required": true
+    },
+    "mg": {
+      "type": "integer",
+      "default": 0
+    },
+    "user": {
+      "via": "posts",
+      "plugin": "users-permissions",
+      "collection": "user",
+      "dominant": true
+    },
+    "comments": {
+      "via": "posts",
+      "collection": "comment"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "name": "Comment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "body": {
+      "type": "richtext",
+      "maxLength": 280
+    },
+    "mg": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "posts": {
+      "collection": "post",
+      "via": "comments",
+      "dominant": true
+    },
+    "users": {
+      "via": "comments",
+      "plugin": "users-permissions",
+      "collection": "user",
+      "dominant": true
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
