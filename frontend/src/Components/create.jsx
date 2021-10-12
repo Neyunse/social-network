@@ -1,5 +1,5 @@
 import React from "react";
-import CameraIcon from "assets/icons/camera";
+import IMGIcon from "assets/icons/camera";
 import GifIcon from "assets/icons/gif";
 import axios from "axios";
 
@@ -91,6 +91,7 @@ class Create extends React.Component {
       maxLength: 280,
       modalgif: false,
       modalemoji: false,
+      modalimg: false,
       fixed: props.isfixed ? "pos_fixed" : null,
       type: props.type,
       scroll: false
@@ -102,6 +103,15 @@ class Create extends React.Component {
   }
   log(gif) {
     var uri = gif.images.original.url;
+    var el = document.getElementById("new-post");
+    el.value += `![](${uri})`;
+    this.setState({ modalgif: false, value: `${this.state.value} ![](${uri})` });
+    el.style.cssText = "height:72px; padding:0";
+  }
+
+
+  addImg(e) {
+    var uri = e.target.value;
     var el = document.getElementById("new-post");
     el.value += `![](${uri})`;
     this.setState({ modalgif: false, value: `${this.state.value} ![](${uri})` });
@@ -225,17 +235,14 @@ class Create extends React.Component {
               {this.state.type === "comment" ? (<button className="button_new_post">Reply</button>) : (<button className="button_new_post">Post</button>)}
 
               <div className="txt-md">
-                <div hidden className="cm">
-                  <label htmlFor="upload-photo">
-                    <CameraIcon className="cameraicon" />
-                  </label>
-                </div>
-                <input type="file" onChange={this.upload} id="upload-photo" />
                 <small>
                   <GifIcon
                     className="cameraicon"
-                    onClick={() => this.setState({ modalemoji: false,  modalgif: true })}
+                    onClick={() => this.setState({ modalemoji: false, modalgif: true })}
                   />
+                </small>
+                <small>
+                  <IMGIcon className="cameraicon" onClick={() => this.setState({ modalgif: false, modalemoji: false, modalimg: true })} />
                 </small>
                 <small>
                   <div className="cameraicon no-bg-emoji" onClick={() => this.setState({ modalemoji: true, modalgif: false })}>😆</div>
@@ -260,6 +267,19 @@ class Create extends React.Component {
             <Picker onSelect={this.addEmoji.bind(this)} />
           </div>
         </>) : null}
+
+        {this.state.modalimg ? (
+          <>
+            <div className="modal_img">
+              <div className="input">
+                <input type="text" className="url" pattern="https://i.imgur.com/HelloWorld.jpeg" onChange={(e)=>this.addImg(e)} name="" id="" />
+              </div>
+              <div className="input">
+                <input type="button" className="button" onClick={() => this.setState({ modalimg:false,modalemoji: false, modalgif: false })} value="Save" />
+              </div>
+            </div>
+          </>
+        ) : null}
       </>
     );
   }

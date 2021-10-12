@@ -157,10 +157,10 @@ img {
   color: #fff;
   cursor: pointer;
 }
-.timeline > .post_container> li{
+.timeline > .post_container > li {
   list-style: none;
 }
-.timeline > .post_container> li > a > article {
+.timeline > .post_container > li > a > article {
   width: 516px;
   height: min-content;
   background: #fff;
@@ -184,47 +184,72 @@ img {
   width: 547px;
   margin-top: 0px;
 }
-.timeline > .post_container> li > a > article > .content > .post_header {
+.timeline > .post_container > li > a > article > .content > .post_header {
   display: inline-flex;
 }
-.timeline > .post_container> li > a > article > .content > .post_header > a {
+.timeline > .post_container > li > a > article > .content > .post_header > a {
   display: inline-flex;
   text-decoration: none;
   color: #535353;
 }
-.timeline > .post_container> li > a > article > .content > .post_header > a > img {
+.timeline
+  > .post_container
+  > li
+  > a
+  > article
+  > .content
+  > .post_header
+  > a
+  > img {
   width: 40px;
   border-radius: 50px;
 }
-.timeline > .post_container> li > a > article > .content > .post_header > a > .us {
+.timeline
+  > .post_container
+  > li
+  > a
+  > article
+  > .content
+  > .post_header
+  > a
+  > .us {
   position: relative;
   left: 6px;
   font-weight: initial;
 }
-.timeline > .post_container> li > a > article > .content > .body {
+.timeline > .post_container > li > a > article > .content > .body {
   max-width: 100%;
 }
-.timeline > .post_container> li > a > article > .content > .body > iframe,
+.timeline > .post_container > li > a > article > .content > .body > iframe,
 video {
   width: 100%;
   height: 234px;
   border: 0px;
 }
-.timeline > .post_container> li > a > article > .content > .body > div > p > img {
+.timeline
+  > .post_container
+  > li
+  > a
+  > article
+  > .content
+  > .body
+  > div
+  > p
+  > img {
   width: 100%;
   height: 100%;
 }
-.timeline > .post_container> li > a > article > .content > .body > div > p {
+.timeline > .post_container > li > a > article > .content > .body > div > p {
   color: #535353;
 }
-.timeline > .post_container> li > a > article > .content > hr {
+.timeline > .post_container > li > a > article > .content > hr {
   height: 1px;
   background: #cacacaa6;
   border: 0px;
   width: 100%;
   margin-top: 5px;
 }
-.timeline > .post_container> li > a > article > .content > .footer {
+.timeline > .post_container > li > a > article > .content > .footer {
   display: block ruby;
 }
 .timeline > .post_container > li > a > article > .content > .footer > .r {
@@ -348,10 +373,40 @@ label {
   text-decoration: none;
   color: black;
 }
-.no-bg-emoji{
-  background: none!important;
-  cursor: pointer;
+.modal_img {
+  position: absolute;
+  background: white;
+  padding: 20px;
+  width: 497px;
+  border: 1px solid #b0b0b0;
+  z-index: 9;
+  border-radius: 8px;
+  top: 16px;
+  box-shadow: 0px 3px 1px 0px #b0b0b0;
+}
+.modal_img > .input {
+  padding-bottom: 9px;
+}
+.modal_img > .input > input.url {
+  overflow: visible;
+  width: 100%;
+  border-radius: 6px;
+  padding: 4px;
+  border: 1px solid gray;
+  outline: none;
+}
+.modal_img > .input > input.button {
+  padding: 4px;
+  background: green;
+  color: #fff;
+  border: 0px;
+  border-radius: 16px;
 
+  cursor: pointer;
+}
+.no-bg-emoji {
+  background: none !important;
+  cursor: pointer;
 }
 header {
   background-color: #fff;
@@ -370,7 +425,7 @@ header {
   margin: 0px 392px;
   width: 100%;
 }
-.container_top_nav>.logo{
+.container_top_nav > .logo {
   font-size: 20px;
 }
 .container_top_nav > .searcher {
@@ -424,43 +479,46 @@ header {
   overflow-x: hidden;
   overflow-y: auto;
 }
-.result>nav>ul>li{
+.result > nav > ul > li {
   list-style: none;
   padding-top: 5px;
   transition: all 2s linear;
 }
-.result>nav>ul>li>a{
+.result > nav > ul > li > a {
   display: block;
   text-decoration: none;
- 
 }
-.user_S{
+.user_S {
   display: inline-flex;
   padding: 6px;
-}.user_S>.user_S_img{
+}
+.user_S > .user_S_img {
   width: 30px;
   float: left;
-}.user_S>.user_S_img>img{
+}
+.user_S > .user_S_img > img {
   border-radius: 50px;
-}.user_S>.user_S_name{
+}
+.user_S > .user_S_name {
   font-size: 14px;
   color: #000;
   padding-left: 10px;
   padding-top: 7px;
   padding-bottom: 7px;
   text-align: unset;
-}.result > nav > ul > li:hover {
+}
+.result > nav > ul > li:hover {
   list-style: none;
   background: #f2f2f2;
   border-radius: 44px;
   cursor: pointer;
 }
-.patreon{
+.patreon {
   position: absolute;
   margin: 7px;
   right: 22px;
 }
-.patreon>a{
+.patreon > a {
   background: rgb(255, 66, 77);
   color: white;
   padding: 6px;

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function CameraIcon(props) {
+function IMGIcon(props) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -8,11 +8,8 @@ function CameraIcon(props) {
       height="1em"
       width="1em"
       {...props}
-    >
-      <path d="M20 5h-2.586l-2.707-2.707A.996.996 0 0 0 14 2h-4a.996.996 0 0 0-.707.293L6.586 5H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2zm-8 12c-2.71 0-5-2.29-5-5 0-2.711 2.29-5 5-5s5 2.289 5 5c0 2.71-2.29 5-5 5z"></path>
-      <path d="M13 9h-2v2H9v2h2v2h2v-2h2v-2h-2z"></path>
-    </svg>
+    ><path d="M4 5h13v7h2V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-2H4V5z"></path><path d="m8 11-3 4h11l-4-6-3 4z"></path><path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path></svg>
   );
 }
 
-export default CameraIcon;
+export default IMGIcon;
