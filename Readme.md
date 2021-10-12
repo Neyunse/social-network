@@ -1,3 +1,7 @@
+#### KagariNetwork
+
+Feel free to send a PR to change/add or correct my project.
+
 ## Install
 
 `./ yarn install`
