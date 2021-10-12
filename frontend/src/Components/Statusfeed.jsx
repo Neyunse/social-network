@@ -194,20 +194,6 @@ class Statusfeed extends React.Component {
 
     };
 
-    DELLALLcomm = async (e, article) => {
-        e.preventDefault();
-        await axios.delete(`http://localhost:1337/comments?_where[posts.id]=${this.state.idpost}`, {
-            cancelToken: source.token,
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        }).then(() => {
-            Notify.success('Comments has been deleted');
-            this.DEL(e, article);
-        }).catch(err => {
-            Notify.failure('Error while deleting comments');
-        })
-    }
 
     // COMMENTs
     MGComm = async (e, comment) => {

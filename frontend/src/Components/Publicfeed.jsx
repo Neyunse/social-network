@@ -185,7 +185,6 @@ class Publicfeed extends React.Component {
       })
       .then(() => {
         Notify.success("Post has been deleted");
-        this.GetPosts(this.state.page);
       })
       .catch((err) => {
         Notify.failure("Error while deleting post");
