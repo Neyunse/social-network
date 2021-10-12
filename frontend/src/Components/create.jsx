@@ -234,11 +234,11 @@ class Create extends React.Component {
                 <small>
                   <GifIcon
                     className="cameraicon"
-                    onClick={() => this.setState({ modalgif: true })}
+                    onClick={() => this.setState({ modalemoji: false,  modalgif: true })}
                   />
                 </small>
                 <small>
-                  <div className="cameraicon no-bg-emoji" onClick={() => this.setState({ modalemoji: true })}>😆</div>
+                  <div className="cameraicon no-bg-emoji" onClick={() => this.setState({ modalemoji: true, modalgif: false })}>😆</div>
                 </small>
                 <small className="nm-ct">{this.state.textLength}</small>
               </div>
