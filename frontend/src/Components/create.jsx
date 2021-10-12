@@ -97,8 +97,8 @@ class Create extends React.Component {
   log(gif) {
     var uri = gif.images.original.url;
     var el = document.getElementById("new-post");
-    el.value = `![](${uri})`;
-    this.setState({ modal: false, value: `![](${uri})` });
+    el.value += `![](${uri})`;
+    this.setState({ modal: false, value: `${this.state.value} ![](${uri})` });
     el.style.cssText = "height:72px; padding:0";
   }
   // Create new post
