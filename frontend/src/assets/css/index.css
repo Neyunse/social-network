@@ -333,6 +333,14 @@ label {
   padding: 10px;
   z-index: 9;
 }
+
+.modal-emoji {
+  position: fixed;
+  right: 287px;
+  top: 65px;
+  padding: 10px;
+  z-index: 9;
+}
 .modal-gif > div {
   width: 257px;
 }
@@ -340,7 +348,11 @@ label {
   text-decoration: none;
   color: black;
 }
+.no-bg-emoji{
+  background: none!important;
+  cursor: pointer;
 
+}
 header {
   background-color: #fff;
   position: fixed;

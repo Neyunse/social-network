@@ -5,6 +5,11 @@ import axios from "axios";
 
 import ReactGiphySearchbox from "react-giphy-searchbox";
 import { Notify } from "notiflix";
+
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
+
+
 let source;
 Notify.init({
   width: '280px',
@@ -84,7 +89,8 @@ class Create extends React.Component {
       value: "",
       textLength: 0,
       maxLength: 280,
-      modal: false,
+      modalgif: false,
+      modalemoji: false,
       fixed: props.isfixed ? "pos_fixed" : null,
       type: props.type,
       scroll: false
@@ -98,8 +104,17 @@ class Create extends React.Component {
     var uri = gif.images.original.url;
     var el = document.getElementById("new-post");
     el.value += `![](${uri})`;
-    this.setState({ modal: false, value: `${this.state.value} ![](${uri})` });
+    this.setState({ modalgif: false, value: `${this.state.value} ![](${uri})` });
     el.style.cssText = "height:72px; padding:0";
+  }
+
+  addEmoji(emoji) {
+    var e = emoji.native;
+    var el = document.getElementById("new-post");
+    el.value += `${e}`;
+    this.setState({ modalemoji: false, value: `${this.state.value} ${e}` });
+    el.style.cssText = "height:72px; padding:0";
+    console.log(emoji)
   }
   // Create new post
 
@@ -143,8 +158,8 @@ class Create extends React.Component {
       user: {
         id: localStorage.getItem("userID"),
       },
-    },settings
-    
+    }, settings
+
     ).then(() => {
       Notify.success("Post has been created");
     }).catch(err => {
@@ -159,15 +174,15 @@ class Create extends React.Component {
         Authorization: "Bearer " + localStorage.getItem("token"),
       }
     };
-    await axios.post("http://localhost:1337/comments", {      
+    await axios.post("http://localhost:1337/comments", {
       body: this.state.value,
       users: {
         id: localStorage.getItem("userID"),
       },
-      posts:{
+      posts: {
         id: this.props.postID
       }
-    },settings).then(() => {
+    }, settings).then(() => {
       Notify.success("Post has been created");
     }).catch(err => {
       Notify.failure("Error creating the post: " + err);
@@ -185,13 +200,13 @@ class Create extends React.Component {
     }
   }
   handleScroll() {
-    if (window.pageYOffset > 0){
+    if (window.pageYOffset > 0) {
       this.setState({
-        scroll:true
+        scroll: true
       })
-    }else{
+    } else {
       this.setState({
-        scroll:false
+        scroll: false
       })
     }
   }
@@ -207,8 +222,8 @@ class Create extends React.Component {
               defaultValue={this.state.value}
             ></textarea>
             <div>
-              {this.state.type === "comment" ? (<button className="button_new_post">Reply</button>):(<button className="button_new_post">Post</button>)}
-              
+              {this.state.type === "comment" ? (<button className="button_new_post">Reply</button>) : (<button className="button_new_post">Post</button>)}
+
               <div className="txt-md">
                 <div hidden className="cm">
                   <label htmlFor="upload-photo">
@@ -219,15 +234,18 @@ class Create extends React.Component {
                 <small>
                   <GifIcon
                     className="cameraicon"
-                    onClick={() => this.setState({ modal: true })}
+                    onClick={() => this.setState({ modalgif: true })}
                   />
+                </small>
+                <small>
+                  <div className="cameraicon no-bg-emoji" onClick={() => this.setState({ modalemoji: true })}>😆</div>
                 </small>
                 <small className="nm-ct">{this.state.textLength}</small>
               </div>
             </div>
           </form>
         </div>
-        {this.state.modal ? (
+        {this.state.modalgif ? (
           <>
             <div className="modal-gif">
               <ReactGiphySearchbox
@@ -237,6 +255,11 @@ class Create extends React.Component {
             </div>
           </>
         ) : null}
+        {this.state.modalemoji ? (<>
+          <div className="modal-emoji">
+            <Picker onSelect={this.addEmoji.bind(this)} />
+          </div>
+        </>) : null}
       </>
     );
   }
