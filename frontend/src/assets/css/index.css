@@ -242,6 +242,9 @@ video {
 .timeline > .post_container > li > a > article > .content > .body > div > p {
   color: #535353;
 }
+.timeline > .post_container > li > a > article > .content > .body > div > p > a {
+  text-decoration: none;
+}
 .timeline > .post_container > li > a > article > .content > hr {
   height: 1px;
   background: #cacacaa6;
