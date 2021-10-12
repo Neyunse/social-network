@@ -275,7 +275,7 @@ class Create extends React.Component {
                 <input type="text" className="url" pattern="https://i.imgur.com/HelloWorld.jpeg" onChange={(e)=>this.addImg(e)} name="" id="" />
               </div>
               <div className="input">
-                <input type="button" className="button" onClick={() => this.setState({ modalimg:false,modalemoji: false, modalgif: false })} value="Save" />
+                <input type="button" className="button" onClick={() => this.setState({ modalimg:false,modalemoji: false, modalgif: false })} value="Close" />
               </div>
             </div>
           </>
