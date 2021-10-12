@@ -16,7 +16,7 @@ http://localhost:1337/admin/settings/users-permissions/roles/1
 
 
 And these are the settings
-![](images/01.png)
+![](images/01_1.png)
 
 ![](images/02.png)
 
