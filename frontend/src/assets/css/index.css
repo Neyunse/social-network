@@ -238,6 +238,7 @@ video {
   > img {
   width: 100%;
   height: 100%;
+  border-radius: 9px;
 }
 .timeline > .post_container > li > a > article > .content > .body > div > p {
   color: #535353;
