@@ -257,12 +257,13 @@ class Publicfeed extends React.Component {
           </div>
         </div>
         <div className={this.state.scroll ? "timeline user_timeline" : "timeline"}>
-          <div className="post_container">
+          <ul className="post_container">
             {this.state.article.length > 0 ? (
               <>
                 {this.state.article.map((article) => (
-                  <Link className="no-link" to={`/s/${article.user[0].username}/${article.id}`}>
-                    <article key={article.id}>
+                  <li key={article.id}>
+                    <Link className="no-link" to={`/s/${article.user[0].username}/${article.id}`}>
+                    <article>
                       <div className="content">
                         <div className="post_header">
                           <Link to={`/u/${article.user[0].username}`}>
@@ -325,10 +326,12 @@ class Publicfeed extends React.Component {
                       </div>
                     </article>
                   </Link>
+                  </li>
                 ))}
               </>
             ) : (
-              <Link className="no-link" to={location.pathname}>
+              <li>
+                <Link className="no-link" to={location.pathname}>
                 <article>
                   <div className="content">
                     <div className="body">
@@ -339,8 +342,9 @@ class Publicfeed extends React.Component {
                   </div>
                 </article>
               </Link>
+              </li>
             )}
-          </div>
+          </ul>
         </div>
       </>
     );

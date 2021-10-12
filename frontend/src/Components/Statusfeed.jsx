@@ -260,158 +260,165 @@ class Statusfeed extends React.Component {
         return (
             <>
                 <div className="timeline post_timeline">
-                    <div className="post_container">
-                        <Link to={`/s/${author.username}/${article.id}`} className="no-link" key={article.id}>
-                            <article>
-                                <div className="content">
-                                    <div className="post_header">
-                                        <Link to={`/u/${author.username}`}>
-                                            <img
-                                                className="post_image_profile_user"
-                                                src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
-                                                alt=""
-                                            />
-                                            <div className="us">
-                                                <span>
-                                                    {author.username}{" "}
-                                                    {author.verified ? (
-                                                        <Verified className="verified" />
-                                                    ) : null}
-                                                </span>
-                                                <br />
+                    <ul className="post_container">
+                        <li key={article.id}>
+                            <Link to={`/s/${author.username}/${article.id}`} className="no-link">
+                                <article>
+                                    <div className="content">
+                                        <div className="post_header">
+                                            <Link to={`/u/${author.username}`}>
+                                                <img
+                                                    className="post_image_profile_user"
+                                                    src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
+                                                    alt=""
+                                                />
+                                                <div className="us">
+                                                    <span>
+                                                        {author.username}{" "}
+                                                        {author.verified ? (
+                                                            <Verified className="verified" />
+                                                        ) : null}
+                                                    </span>
+                                                    <br />
+                                                    <small>
+                                                        {moment(article.created_at).format("llll")}
+                                                    </small>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <div className="body">
+                                            <MarkDown string={article.body} />
+                                        </div>
+                                        <hr />
+                                        <div className="footer">
+                                            <span>
                                                 <small>
-                                                    {moment(article.created_at).format("llll")}
+                                                    <Heart
+                                                        onClick={(e) => this.MG(e, article)}
+                                                        className="heart"
+                                                    />{" "}
+                                                    {article.mg}
                                                 </small>
-                                            </div>
-                                        </Link>
+                                            </span>
+                                            <span className="r">
+                                                {author.username === localStorage.getItem('username') ? (
+                                                    <>
+                                                        {article.comments.length > 0 ? null : (<>
+                                                            <small onClick={(e) => this.DEL(e, article)}>
+                                                                <TrashICon className="Trash" />
+                                                            </small>
+                                                        </>)}
+                                                    </>
+                                                ) : null}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="body">
-                                        <MarkDown string={article.body} />
-                                    </div>
-                                    <hr />
-                                    <div className="footer">
-                                        <span>
-                                            <small>
-                                                <Heart
-                                                    onClick={(e) => this.MG(e, article)}
-                                                    className="heart"
-                                                />{" "}
-                                                {article.mg}
-                                            </small>
-                                        </span>
-                                        <span className="r">
-                                            {author.username === localStorage.getItem('username') ? (
-                                                <>
-                                                    {article.comments.length > 0 ? null : (<>
-                                                        <small onClick={(e) => this.DEL(e, article)}>
-                                                            <TrashICon className="Trash" />
-                                                        </small>
-                                                    </>)}
-                                                </>
-                                            ) : null}
-                                        </span>
-                                    </div>
-                                </div>
-                            </article>
-                        </Link>
+                                </article>
+                            </Link>
+                        </li>
                         <Create type="comment" postID={article.id} />
 
                         {comments.map((comments, index) => (
                             <>
                                 {comments.blocked ? (
-                                    <><Link className="no-link" to={location.pathname} key={comments.id} >
-                                        <article>
-                                            <div className="content">
-                                                <div className="post_header">
-                                                    <Link to={`/u/${comments.users[0].username}`}>
-                                                        <img
-                                                            className="post_image_profile_user"
-                                                            src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                                            alt=""
-                                                        />
-                                                        <div className="us">
-                                                            <span>
-                                                                {comments.users[0].username}{" "}
-                                                                {comments.users[0].verified ? (
-                                                                    <Verified className="verified" />
-                                                                ) : null}
-                                                            </span>
-                                                            <br />
-                                                            <small>
-                                                                {moment(comments.created_at).format("llll")}
-                                                            </small>
+                                    <>
+                                        <li key={`c-${comments.id}`}>
+                                            <Link className="no-link" to={location.pathname} >
+                                                <article>
+                                                    <div className="content">
+                                                        <div className="post_header">
+                                                            <Link to={`/u/${comments.users[0].username}`}>
+                                                                <img
+                                                                    className="post_image_profile_user"
+                                                                    src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                                                    alt=""
+                                                                />
+                                                                <div className="us">
+                                                                    <span>
+                                                                        {comments.users[0].username}{" "}
+                                                                        {comments.users[0].verified ? (
+                                                                            <Verified className="verified" />
+                                                                        ) : null}
+                                                                    </span>
+                                                                    <br />
+                                                                    <small>
+                                                                        {moment(comments.created_at).format("llll")}
+                                                                    </small>
+                                                                </div>
+                                                            </Link>
                                                         </div>
-                                                    </Link>
-                                                </div>
-                                                <br />
-                                                <div className="body"><br />
-                                                    <p style={{
-                                                        textAlign: "center",
-                                                    }}>This comment was blocked by the admin</p>
-                                                </div>
+                                                        <br />
+                                                        <div className="body"><br />
+                                                            <p style={{
+                                                                textAlign: "center",
+                                                            }}>This comment was blocked by the admin</p>
+                                                        </div>
 
-                                            </div>
-                                        </article>
-                                    </Link>
+                                                    </div>
+                                                </article>
+                                            </Link>
+                                        </li>
                                     </>
                                 ) : (
                                     <>
-                                        <Link className="no-link" to={location.pathname} key={comments.id}>
-                                            <article >
+                                        <li key={`c-${comments.id}`}>
+                                            <Link className="no-link" to={location.pathname}>
+                                                <article >
 
-                                                <div className="content">
-                                                    <div className="post_header">
-                                                        <Link to={`/u/${comments.users[0].username}`}>
-                                                            <img
-                                                                className="post_image_profile_user"
-                                                                src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                                                alt=""
-                                                            />
-                                                            <div className="us">
-                                                                <span>
-                                                                    {comments.users[0].username}{" "}
-                                                                    {comments.users[0].verified ? (
-                                                                        <Verified className="verified" />
-                                                                    ) : null}
-                                                                </span>
-                                                                <br />
+                                                    <div className="content">
+                                                        <div className="post_header">
+                                                            <Link to={`/u/${comments.users[0].username}`}>
+                                                                <img
+                                                                    className="post_image_profile_user"
+                                                                    src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                                                    alt=""
+                                                                />
+                                                                <div className="us">
+                                                                    <span>
+                                                                        {comments.users[0].username}{" "}
+                                                                        {comments.users[0].verified ? (
+                                                                            <Verified className="verified" />
+                                                                        ) : null}
+                                                                    </span>
+                                                                    <br />
+                                                                    <small>
+                                                                        {moment(comments.created_at).format("llll")}
+                                                                    </small>
+                                                                </div>
+                                                            </Link>
+                                                        </div>
+                                                        <div className="body">
+                                                            <MarkDown string={comments.body} />
+                                                        </div>
+                                                        <hr />
+                                                        <div className="footer">
+                                                            <span>
                                                                 <small>
-                                                                    {moment(comments.created_at).format("llll")}
-                                                                </small>
-                                                            </div>
-                                                        </Link>
-                                                    </div>
-                                                    <div className="body">
-                                                        <MarkDown string={comments.body} />
-                                                    </div>
-                                                    <hr />
-                                                    <div className="footer">
-                                                        <span>
-                                                            <small>
-                                                                <Heart
-                                                                    onClick={(e) => this.MGComm(e, comments)}
-                                                                    className="heart"
-                                                                />{" "}
+                                                                    <Heart
+                                                                        onClick={(e) => this.MGComm(e, comments)}
+                                                                        className="heart"
+                                                                    />{" "}
 
-                                                                {comments.mg > 0 ? comments.mg : 0}
-                                                            </small>
-                                                        </span>
-                                                        <span className="r">
-                                                            {comments.users[0].username === localStorage.getItem('username') ? (
-                                                                <small onClick={(e) => this.DELComm(e, comments.id)}>
-                                                                    <TrashICon className="Trash" />
+                                                                    {comments.mg > 0 ? comments.mg : 0}
                                                                 </small>
-                                                            ) : null}
-                                                        </span>
+                                                            </span>
+                                                            <span className="r">
+                                                                {comments.users[0].username === localStorage.getItem('username') ? (
+                                                                    <small onClick={(e) => this.DELComm(e, comments.id)}>
+                                                                        <TrashICon className="Trash" />
+                                                                    </small>
+                                                                ) : null}
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </article>
-                                        </Link>
+                                                </article>
+                                            </Link>
+                                        </li>
                                     </>
                                 )}
                             </>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             </>
         );

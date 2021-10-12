@@ -156,7 +156,10 @@ img {
   color: #fff;
   cursor: pointer;
 }
-.timeline > .post_container > a > article {
+.timeline > .post_container> li{
+  list-style: none;
+}
+.timeline > .post_container> li > a > article {
   width: 516px;
   height: min-content;
   background: #fff;
@@ -180,54 +183,55 @@ img {
   width: 547px;
   margin-top: 0px;
 }
-.timeline > .post_container > a > article > .content > .post_header {
+.timeline > .post_container> li > a > article > .content > .post_header {
   display: inline-flex;
 }
-.timeline > .post_container > a > article > .content > .post_header > a {
+.timeline > .post_container> li > a > article > .content > .post_header > a {
   display: inline-flex;
   text-decoration: none;
   color: #535353;
 }
-.timeline > .post_container > a > article > .content > .post_header > a > img {
+.timeline > .post_container> li > a > article > .content > .post_header > a > img {
   width: 40px;
 }
-.timeline > .post_container > a > article > .content > .post_header > a > .us {
+.timeline > .post_container> li > a > article > .content > .post_header > a > .us {
   position: relative;
   left: 6px;
   font-weight: initial;
 }
-.timeline > .post_container > a > article > .content > .body {
+.timeline > .post_container> li > a > article > .content > .body {
   max-width: 100%;
 }
-.timeline > .post_container > a > article > .content > .body > iframe,
+.timeline > .post_container> li > a > article > .content > .body > iframe,
 video {
   width: 100%;
   height: 234px;
   border: 0px;
 }
-.timeline > .post_container > a > article > .content > .body > div > p > img {
+.timeline > .post_container> li > a > article > .content > .body > div > p > img {
   width: 100%;
   height: 100%;
 }
-.timeline > .post_container > a > article > .content > .body > div > p {
+.timeline > .post_container> li > a > article > .content > .body > div > p {
   color: #535353;
 }
-.timeline > .post_container > a > article > .content > hr {
+.timeline > .post_container> li > a > article > .content > hr {
   height: 1px;
   background: #cacacaa6;
   border: 0px;
   width: 100%;
   margin-top: 5px;
 }
-.timeline > .post_container > a > article > .content > .footer {
+.timeline > .post_container> li > a > article > .content > .footer {
   display: block ruby;
 }
-.timeline > .post_container > a > article > .content > .footer > .r {
+.timeline > .post_container > li > a > article > .content > .footer > .r {
   float: right;
   display: block ruby;
 }
 .timeline
   > .post_container
+  > li
   > a
   > article
   > .content
