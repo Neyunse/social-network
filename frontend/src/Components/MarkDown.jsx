@@ -29,7 +29,7 @@ class MarkDown extends React.Component {
         var str = this.props.string;
         var pattern = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         var video = str.match(pattern);
-        var embed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${this.getId(video)}?rel=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>`
+        var embed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${this.getId(video)}?rel=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; allowfullScreen"></iframe>`
         
         
         var deluri = this.props.string.replace(/(?:https?|ftp):\/\/[\n\S]+/g, "")
