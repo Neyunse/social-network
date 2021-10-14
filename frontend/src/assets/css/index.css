@@ -205,8 +205,6 @@ img {
   border-radius: 50px;
 }
 
-
-
 .timeline
   > .post_container
   > li
@@ -223,7 +221,16 @@ img {
 .timeline > .post_container > li > a > article > .content > .body {
   max-width: 100%;
 }
-.timeline > .post_container > li > a > article > .content > .body > div > p > iframe {
+.timeline
+  > .post_container
+  > li
+  > a
+  > article
+  > .content
+  > .body
+  > div
+  > p
+  > iframe {
   width: 100%;
   height: 289px;
   border-radius: 9px;
@@ -245,7 +252,16 @@ img {
 .timeline > .post_container > li > a > article > .content > .body > div > p {
   color: #535353;
 }
-.timeline > .post_container > li > a > article > .content > .body > div > p > a {
+.timeline
+  > .post_container
+  > li
+  > a
+  > article
+  > .content
+  > .body
+  > div
+  > p
+  > a {
   text-decoration: none;
 }
 .timeline > .post_container > li > a > article > .content > hr {

@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "agent-base": "^6.0.2",
     "axios": "^0.21.4",
+    "babel-eslint": "^10.1.0",
     "create-react-class": "^15.7.0",
     "detect-browser-language": "^0.0.2",
     "dotenv": "^10.0.0",
@@ -39,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --fix"
+    "lint": "npx eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -60,7 +62,14 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.11.0",
-    "eslint-plugin-react": "^7.26.1"
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.26.1",
+    "prettier": "^2.4.1"
   }
 }

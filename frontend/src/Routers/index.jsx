@@ -1,6 +1,7 @@
+/* eslint-disable quotes */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-//import NoMatch from 'react-router-nomatch';
+// import NoMatch from 'react-router-nomatch';
 import Main from 'layout';
 // URL
 import Home from 'Views/home';
@@ -25,7 +26,7 @@ function Router() {
           )}
         />
       </Main>
-      
+
     </Switch>
   );
 }

@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "App";
-import 'assets/css/normalize.css'
-import 'assets/css/index.css'
+import "assets/css/normalize.css";
+import "assets/css/index.css";
 import { BrowserRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -14,27 +15,23 @@ import es from "i18n/es.json";
 
 const options = {
   order: ["querystring", "navigator"],
-  lookupQuerystring: "lng",
+  lookupQuerystring: "lng"
 };
-i18next
-  .use(XHR)
-  .use(LanguageDetector)
-  .init({
+i18next.
+  use(XHR).
+  use(LanguageDetector).
+  init({
     interpolation: { escapeValue: false },
-    //lng: 'en',
+    // lng: 'en',
     detection: options,
     fallbackLng: "en",
     supportedLngs: ["en", "es"],
     resources: {
-      en: {
-        common: en,
-      },
-      es: {
-        common: es,
-      },
+      en: { common: en },
+      es: { common: es }
     },
 
-    debug: false,
+    debug: false
   });
 
 ReactDOM.render(

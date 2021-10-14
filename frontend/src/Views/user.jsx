@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import Userfeed from "Components/userfeed";
 function UserProfileFeed(props) {
