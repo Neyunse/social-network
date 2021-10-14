@@ -191,6 +191,11 @@ class Publicfeed extends React.Component {
       });
   };
 
+  RedirectPost(e,author,idPost){
+    e.preventDefault();
+    location.replace(`/s/${author}/${idPost}`);
+  }
+
   // Get Comments count
 
   render() {
@@ -213,11 +218,7 @@ class Publicfeed extends React.Component {
           <ul className="post_container">
             {this.state.article.map((article) => (
               <li key={article.id}>
-                <Link
-                  className="no-link"
-                  to={`/s/${article.user[0].username}/${article.id}`}
-                >
-                  <article>
+                <article>
                     <div className="content">
                       <div className="post_header">
                         <Link to={`/u/${article.user[0].username}`}>
@@ -240,7 +241,7 @@ class Publicfeed extends React.Component {
                           </div>
                         </Link>
                       </div>
-                      <div className="body">
+                      <div className="body" onClick={(e)=>this.RedirectPost(e,article.user[0].username,article.id)}>
                         <MarkDown string={article.body} />
                       </div>
                       <hr />
@@ -278,7 +279,6 @@ class Publicfeed extends React.Component {
                       </div>
                     </div>
                   </article>
-                </Link>
               </li>
             ))}
           </ul>

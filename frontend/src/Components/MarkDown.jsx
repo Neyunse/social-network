@@ -21,9 +21,11 @@ class MarkDown extends React.Component {
 
       if (this.props.string.includes("@")) {
         var str = this.props.string;
-        var pattern = /\B@[a-z0-9_-]+/gi;
-        var user = str.match(pattern);
-        this.setState({ text: this.props.string.replace(user, `[${user}](http://localhost:3000/u/${user})`) });
+
+        var user = str.replace(/@/g, "");
+
+        this.setState({ text: `[@${user}](http://localhost:3000/u/${user})`});
+
       } else if (this.props.string.includes("https://www.youtube.com/watch")) {
         // if this.props.string return a youtube link then we need to parse it and return a embeded video.
         var str = this.props.string;
@@ -36,7 +38,20 @@ class MarkDown extends React.Component {
         console.log(deluri);
         this.setState({ text: `<p>${deluri}<p> ${embed}` });
         //this.setState({ text: this.props.string.replace(video[0], ) });
-      }else {
+      }else if (this.props.string.includes("https://youtu.be/")) {
+        // if this.props.string return a youtube link then we need to parse it and return a embeded video.
+        var str = this.props.string;
+        var pattern = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        var video = str.match(pattern);
+        var embed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${this.getId(video)}?rel=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen="allowfullscreen"></iframe>`
+        
+        
+        var deluri = this.props.string.replace(/(?:https?|ftp):\/\/[\n\S]+/g, "")
+        console.log(deluri);
+        this.setState({ text: `<p>${deluri}<p> ${embed}` });
+        //this.setState({ text: this.props.string.replace(video[0], ) });
+      }
+      else {
         this.setState({ text: this.props.string });
       }
 

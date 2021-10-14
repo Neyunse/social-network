@@ -212,6 +212,9 @@ class Publicfeed extends React.Component {
     })
 
   };
+  RedirectPost(author,idPost){
+    location.replace(`/s/${author}/${idPost}`);
+  }
   render() {
     socket.emit("subscribe", "post");
 
@@ -261,8 +264,8 @@ class Publicfeed extends React.Component {
               <>
                 {this.state.article.map((article) => (
                   <li key={article.id}>
-                    <Link className="no-link" to={`/s/${article.user[0].username}/${article.id}`}>
-                    <article>
+                    
+                    <article onClick={()=>this.RedirectPost(article.user[0].username,article.id)}>
                       <div className="content">
                         <div className="post_header">
                           <Link to={`/u/${article.user[0].username}`}>
@@ -324,13 +327,13 @@ class Publicfeed extends React.Component {
                         </div>
                       </div>
                     </article>
-                  </Link>
+
                   </li>
                 ))}
               </>
             ) : (
               <li>
-                <Link className="no-link" to={location.pathname}>
+
                 <article>
                   <div className="content">
                     <div className="body">
@@ -340,7 +343,6 @@ class Publicfeed extends React.Component {
                     </div>
                   </div>
                 </article>
-              </Link>
               </li>
             )}
           </ul>
