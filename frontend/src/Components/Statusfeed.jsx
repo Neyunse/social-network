@@ -10,6 +10,7 @@ import { Notify } from 'notiflix';
 import Create from './create';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import CommentsIcon from "assets/icons/comments";
 /* eslint-disable */
 let source;
 let interval;
@@ -317,6 +318,13 @@ class Statusfeed extends React.Component {
                           className="heart"
                         />{' '}
                         {article.mg}
+                      </small>
+                    </span>
+                    &nbsp;&nbsp;
+                    <span>
+                      <small>
+                        <CommentsIcon className="heart" />{" "}
+                        {this.state.comments.length}
                       </small>
                     </span>
                     <span className="r">
