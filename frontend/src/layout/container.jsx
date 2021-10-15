@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
 import UserNav from "Components/usernav";
 import TopNav from './TopNav';
+import moment from "moment";
+
 function Container(props) {
   const { children } = props;
+  moment.locale(localStorage.getItem('i18nextLng')); // localStorage.getItem('i18nextLng')
   return (
     <>
       <TopNav />

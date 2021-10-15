@@ -9,7 +9,6 @@ import Create from "./create";
 import TrashICon from "assets/icons/trash";
 import CommentsIcon from "assets/icons/comments";
 import { Notify } from "notiflix";
-
 /* eslint-disable */
 let source;
 let interval;
@@ -121,7 +120,7 @@ class Publicfeed extends React.Component {
         //console.log(res);
         this.setState({ article: res.data, length: res.data.length });
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // if (res.status === 200) {
     //   this.setState({ article: res.data, length: res.data.length });
     // }
@@ -191,7 +190,7 @@ class Publicfeed extends React.Component {
       });
   };
 
-  RedirectPost(e,author,idPost){
+  RedirectPost(e, author, idPost) {
     e.preventDefault();
     location.replace(`/s/${author}/${idPost}`);
   }
@@ -219,9 +218,10 @@ class Publicfeed extends React.Component {
             {this.state.article.map((article) => (
               <li key={article.id}>
                 <article>
-                    <div className="content">
+                  <div className="content">
+                    <div className="card_container" onClick={(e) => this.RedirectPost(e, article.user[0].username, article.id)}>
                       <div className="post_header">
-                        <Link to={`/u/${article.user[0].username}`}>
+                        <Link to={``}>
                           <img
                             className="post_image_profile_user"
                             src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
@@ -236,49 +236,50 @@ class Publicfeed extends React.Component {
                             </span>
                             <br />
                             <small>
-                              {moment(article.created_at).format("llll")}
+                              {moment(article.created_at).fromNow()}
                             </small>
                           </div>
                         </Link>
                       </div>
-                      <div className="body" onClick={(e)=>this.RedirectPost(e,article.user[0].username,article.id)}>
+                      <div className="body">
                         <MarkDown string={article.body} />
                       </div>
-                      <hr />
-                      <div className="footer">
-                        <span>
-                          <small>
-                            <Heart
-                              onClick={(e) => this.MG(e, article)}
-                              className="heart"
-                            />{" "}
-                            {article.mg}
-                          </small>
-                        </span>
-                        &nbsp;&nbsp;
-                        <span>
-                          <small>
-                            <CommentsIcon className="heart" />{" "}
-                            {article.comments.length}
-                          </small>
-                        </span>
-                        <span className="r">
-                          {article.user[0].username ===
-                          localStorage.getItem("username") ? (
-                            <>
-                              {article.comments.length > 0 ? null : (
-                                <>
-                                  <small onClick={(e) => this.DEL(e, article)}>
-                                    <TrashICon className="Trash" />
-                                  </small>
-                                </>
-                              )}
-                            </>
-                          ) : null}
-                        </span>
-                      </div>
                     </div>
-                  </article>
+                    <hr />
+                    <div className="footer">
+                      <span>
+                        <small>
+                          <Heart
+                            onClick={(e) => this.MG(e, article)}
+                            className="heart"
+                          />{" "}
+                          {article.mg}
+                        </small>
+                      </span>
+                      &nbsp;&nbsp;
+                      <span>
+                        <small>
+                          <CommentsIcon className="heart" />{" "}
+                          {article.comments.length}
+                        </small>
+                      </span>
+                      <span className="r">
+                        {article.user[0].username ===
+                          localStorage.getItem("username") ? (
+                          <>
+                            {article.comments.length > 0 ? null : (
+                              <>
+                                <small onClick={(e) => this.DEL(e, article)}>
+                                  <TrashICon className="Trash" />
+                                </small>
+                              </>
+                            )}
+                          </>
+                        ) : null}
+                      </span>
+                    </div>
+                  </div>
+                </article>
               </li>
             ))}
           </ul>

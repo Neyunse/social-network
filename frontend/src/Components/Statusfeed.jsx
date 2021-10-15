@@ -2,12 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import Verified from 'assets/icons/verified';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import MarkDown from './MarkDown';
 import Heart from 'assets/icons/heart';
 import TrashICon from 'assets/icons/trash';
 import { Notify } from 'notiflix';
 import Create from './create';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 /* eslint-disable */
 let source;
 let interval;
@@ -106,8 +108,10 @@ class Statusfeed extends React.Component {
       loading: true,
       user: props.user,
       idpost: props.pid,
+      scroll: false,
     };
     source = axios.CancelToken.source();
+    this.handleScroll = this.handleScroll.bind(this)
     //console.log(props);
   }
 
@@ -149,6 +153,7 @@ class Statusfeed extends React.Component {
   };
 
   componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
     this.GetPosts();
     this.GetComments();
   }
@@ -157,11 +162,22 @@ class Statusfeed extends React.Component {
     return this.state !== nextState;
   }
   componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
     if (source) {
       source.cancel('Landing Component got unmounted');
     }
   }
-
+  handleScroll() {
+    if (window.pageYOffset > 0) {
+      this.setState({
+        scroll: true
+      })
+    } else {
+      this.setState({
+        scroll: false
+      })
+    }
+  }
   // LIKE & DISLIKE
 
   MG = async (e, article) => {
@@ -253,37 +269,44 @@ class Statusfeed extends React.Component {
       this.GetPosts();
     });
 
-    
+
     return (
       <>
+        <div className={this.state.scroll ? `add_title pos_fixed` : "add_title"}>
+          <div className="in_line_flex">
+            <NavLink to="/home" exact><span><FontAwesomeIcon icon={faArrowLeft} className="return" /></span></NavLink> <span><b>Post</b></span>
+          </div>
+        </div>
         <div className="timeline post_timeline">
           <ul className="post_container">
             <li key={article.id}>
               <article>
                 <div className="content">
-                  <div className="post_header">
-                    <Link to={`/u/${author.username}`}>
-                      <img
-                        className="post_image_profile_user"
-                        src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
-                        alt=""
-                      />
-                      <div className="us">
-                        <span>
-                          {author.username}{' '}
-                          {author.verified ? (
-                            <Verified className="verified" />
-                          ) : null}
-                        </span>
-                        <br />
-                        <small>
-                          {moment(article.created_at).format('llll')}
-                        </small>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="body">
-                    <MarkDown string={article.body} />
+                  <div className="card_container">
+                    <div className="post_header">
+                      <Link to={`/u/${author.username}`}>
+                        <img
+                          className="post_image_profile_user"
+                          src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
+                          alt=""
+                        />
+                        <div className="us">
+                          <span>
+                            {author.username}{' '}
+                            {author.verified ? (
+                              <Verified className="verified" />
+                            ) : null}
+                          </span>
+                          <br />
+
+                        </div>
+                      </Link>
+                    </div>
+                    <div className="body">
+
+                      <MarkDown string={article.body} />
+                      <small>{moment(article.created_at).format("h:mm a")}</small>. <small>{moment(article.created_at).format("ll")}</small>
+                    </div>
                   </div>
                   <hr />
                   <div className="footer">
@@ -322,37 +345,40 @@ class Statusfeed extends React.Component {
                     <li key={`c-${comments.id}`}>
                       <article>
                         <div className="content">
-                          <div className="post_header">
-                            <Link to={`/u/${comments.users[0].username}`}>
-                              <img
-                                className="post_image_profile_user"
-                                src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                alt=""
-                              />
-                              <div className="us">
-                                <span>
-                                  {comments.users[0].username}{' '}
-                                  {comments.users[0].verified ? (
-                                    <Verified className="verified" />
-                                  ) : null}
-                                </span>
-                                <br />
-                                <small>
-                                  {moment(comments.created_at).format('llll')}
-                                </small>
-                              </div>
-                            </Link>
-                          </div>
-                          <br />
-                          <div className="body">
+                          <div className="card_container">
+
+                            <div className="post_header">
+                              <Link to={`/u/${comments.users[0].username}`}>
+                                <img
+                                  className="post_image_profile_user"
+                                  src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                  alt=""
+                                />
+                                <div className="us">
+                                  <span>
+                                    {comments.users[0].username}{' '}
+                                    {comments.users[0].verified ? (
+                                      <Verified className="verified" />
+                                    ) : null}
+                                  </span>
+                                  <br />
+                                  <small>
+                                    {moment(comments.created_at).format('llll')}
+                                  </small>
+                                </div>
+                              </Link>
+                            </div>
                             <br />
-                            <p
-                              style={{
-                                textAlign: 'center',
-                              }}
-                            >
-                              This comment was blocked by the admin
-                            </p>
+                            <div className="body">
+                              <br />
+                              <p
+                                style={{
+                                  textAlign: 'center',
+                                }}
+                              >
+                                This comment was blocked by the admin
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </article>
@@ -363,29 +389,31 @@ class Statusfeed extends React.Component {
                     <li key={`c-${comments.id}`}>
                       <article>
                         <div className="content">
-                          <div className="post_header">
-                            <Link to={`/u/${comments.users[0].username}`}>
-                              <img
-                                className="post_image_profile_user"
-                                src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                alt=""
-                              />
-                              <div className="us">
-                                <span>
-                                  {comments.users[0].username}{' '}
-                                  {comments.users[0].verified ? (
-                                    <Verified className="verified" />
-                                  ) : null}
-                                </span>
-                                <br />
-                                <small>
-                                  {moment(comments.created_at).format('llll')}
-                                </small>
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="body">
-                            <MarkDown string={comments.body} />
+                          <div className="card_container">
+                            <div className="post_header">
+                              <Link to={`/u/${comments.users[0].username}`}>
+                                <img
+                                  className="post_image_profile_user"
+                                  src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                  alt=""
+                                />
+                                <div className="us">
+                                  <span>
+                                    {comments.users[0].username}{' '}
+                                    {comments.users[0].verified ? (
+                                      <Verified className="verified" />
+                                    ) : null}
+                                  </span>
+                                  <br />
+                                  <small>
+                                    {moment(comments.created_at).format('llll')}
+                                  </small>
+                                </div>
+                              </Link>
+                            </div>
+                            <div className="body">
+                              <MarkDown string={comments.body} />
+                            </div>
                           </div>
                           <hr />
                           <div className="footer">
@@ -400,7 +428,7 @@ class Statusfeed extends React.Component {
                             </span>
                             <span className="r">
                               {comments.users[0].username ===
-                              localStorage.getItem('username') ? (
+                                localStorage.getItem('username') ? (
                                 <small
                                   onClick={(e) => this.DELComm(e, comments.id)}
                                 >

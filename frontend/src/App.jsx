@@ -1,7 +1,7 @@
 import Directions from "Routers";
 
 function App() {
-  return <Directions />;
+  return (<Directions />);
 }
 
 export default App;

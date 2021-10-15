@@ -2,13 +2,16 @@ import React from "react";
 import axios from "axios";
 import moment from "moment";
 import Verified from "assets/icons/verified";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import MarkDown from "./MarkDown";
 import Heart from "assets/icons/heart";
 import TrashICon from "assets/icons/trash";
 import { Notify } from "notiflix";
 import CommentsIcon from "assets/icons/comments";
-/* eslint-disable */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarAlt,  faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import 'moment/locale/fr';
+import 'moment/locale/es';
 let source;
 let interval;
 const io = require("socket.io-client");
@@ -106,6 +109,7 @@ class Publicfeed extends React.Component {
       patreonID: "",
       scroll: false,
       userData: [],
+      userDateCreated: "",
     };
     source = axios.CancelToken.source();
     this.handleScroll = this.handleScroll.bind(this);
@@ -151,6 +155,7 @@ class Publicfeed extends React.Component {
       User_id: res.data[0].user_id,
       patreonID: res.data[0].patreonID,
       userData: res.data[0],
+      userDateCreated: moment(res.data[0].created_at).format("LL"),
     });
     //console.log(res.data);
   };
@@ -212,7 +217,7 @@ class Publicfeed extends React.Component {
     })
 
   };
-  RedirectPost(author,idPost){
+  RedirectPost(author, idPost) {
     location.replace(`/s/${author}/${idPost}`);
   }
   render() {
@@ -230,7 +235,12 @@ class Publicfeed extends React.Component {
 
     return (
       <>
-        <div className={this.state.scroll ? "add pos_fixed" : "add"}>
+      <div className={this.state.scroll ? `add_title pos_fixed` : "add_title"}>
+          <div className="in_line_flex">
+            <NavLink to="/home" exact><span><FontAwesomeIcon icon={faArrowLeft} className="return" /></span></NavLink> <span><b>Post</b></span>
+          </div>
+        </div>
+        <div className={"add"}>
           <div className="header">
             <div className="banner">
 
@@ -254,7 +264,14 @@ class Publicfeed extends React.Component {
                   ) : null}
                 </b>
               </div><br />
-             
+              <div className="bio">
+                <p><small>{this.state.bio}</small></p>
+              </div>
+              <div className="footer_profile">
+                <div className="posts">
+                  <span><small><FontAwesomeIcon icon={faCalendarAlt} className="calendar_color" /> {this.state.userDateCreated}</small></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -264,32 +281,34 @@ class Publicfeed extends React.Component {
               <>
                 {this.state.article.map((article) => (
                   <li key={article.id}>
-                    
-                    <article onClick={()=>this.RedirectPost(article.user[0].username,article.id)}>
+
+                    <article>
                       <div className="content">
-                        <div className="post_header">
-                          <Link to={`/u/${article.user[0].username}`}>
-                            <img
-                              className="post_image_profile_user"
-                              src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
-                              alt=""
-                            />
-                            <div className="us">
-                              <span>
-                                {article.user[0].username}{" "}
-                                {article.user[0].verified ? (
-                                  <Verified className="verified" />
-                                ) : null}
-                              </span>
-                              <br />
-                              <small>
-                                {moment(article.created_at).format("llll")}
-                              </small>
-                            </div>
-                          </Link>
-                        </div>
-                        <div className="body">
-                          <MarkDown string={article.body} />
+                        <div className="card_container" onClick={() => this.RedirectPost(article.user[0].username, article.id)}>
+                          <div className="post_header">
+                            <Link to={``}>
+                              <img
+                                className="post_image_profile_user"
+                                src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
+                                alt=""
+                              />
+                              <div className="us">
+                                <span>
+                                  {article.user[0].username}{" "}
+                                  {article.user[0].verified ? (
+                                    <Verified className="verified" />
+                                  ) : null}
+                                </span>
+                                <br />
+                                <small>
+                                  {moment(article.created_at).fromNow()}
+                                </small>
+                              </div>
+                            </Link>
+                          </div>
+                          <div className="body">
+                            <MarkDown string={article.body} />
+                          </div>
                         </div>
                         <hr />
                         <div className="footer">
@@ -336,10 +355,12 @@ class Publicfeed extends React.Component {
 
                 <article>
                   <div className="content">
-                    <div className="body">
-                      <p style={{
-                        textAlign: "center",
-                      }}><b>{this.state.user}</b> don't has post yet</p>
+                    <div className="card_container">
+                      <div className="body">
+                        <p style={{
+                          textAlign: "center",
+                        }}><b>{this.state.user}</b> don't has post yet</p>
+                      </div>
                     </div>
                   </div>
                 </article>
