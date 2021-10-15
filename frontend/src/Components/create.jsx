@@ -210,7 +210,7 @@ class Create extends React.Component {
     }
   }
   handleScroll() {
-    if (window.pageYOffset > 73) {
+    if (window.pageYOffset > 58) {
       this.setState({
         scroll: true
       })
