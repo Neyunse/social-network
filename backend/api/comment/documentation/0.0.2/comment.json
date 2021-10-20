@@ -634,6 +634,9 @@
                 "biografia": {
                   "type": "string"
                 },
+                "picture": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

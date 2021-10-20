@@ -98,6 +98,9 @@
     },
     "biografia": {
       "type": "richtext"
+    },
+    "picture": {
+      "type": "string"
     }
   }
 }
