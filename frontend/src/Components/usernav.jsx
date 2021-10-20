@@ -32,8 +32,8 @@ class UserNav extends React.Component {
       }
     );
     this.setState({ 
-        avatar: process.env.REACT_APP_APIURI+res.data.avatar.url,
-        banner: process.env.REACT_APP_APIURI+res.data.banner.url
+      avatar: res.data.avatar ? process.env.REACT_APP_APIURI + res.data.avatar.url : res.data.picture,
+      banner: res.data.banner ? process.env.REACT_APP_APIURI + res.data.banner.url : "https://images.squarespace-cdn.com/content/v1/5aaa042ab27e39d1bff9feb7/1522214250417-5CR04L9W9PABPQVBYJ97/bg-banner-blue.png",
     });
     //console.log(res.data.banner);
   };

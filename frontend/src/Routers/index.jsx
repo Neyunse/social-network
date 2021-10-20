@@ -3,15 +3,19 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 // import NoMatch from 'react-router-nomatch';
 import Main from 'layout';
+import LogIn from 'layout/login';
 // URL
 import Home from 'Views/home';
 import User from 'Views/user';
 import Auth from 'Views/auth';
 import post from 'Views/post'
+import LoginRedirect from 'Components/LoginRedirect';
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Auth} exact />
+      <Route exact path="/connect/:providerName" component={LoginRedirect} />
       <Main>
         <Route
           component={({ match }) => (

@@ -22,7 +22,7 @@ module.exports = {
     semi: 0,
     curly: 'off',
     quotes: 'off',
-    indent: ['error', 2],
+    indent:'off',
     'no-unused-vars': 'off',
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',

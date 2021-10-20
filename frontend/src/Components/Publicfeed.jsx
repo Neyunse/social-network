@@ -215,18 +215,32 @@ class Publicfeed extends React.Component {
         <Create isfixed={true} postID="null" />
         <div className={this.state.scroll ? "timeline tm_top" : "timeline"}>
           <ul className="post_container">
-            {this.state.article.map((article) => (
+            {this.state.article.map((article) => (console.log(article),
               <li key={article.id}>
                 <article>
                   <div className="content">
                     <div className="card_container" onClick={(e) => this.RedirectPost(e, article.user[0].username, article.id)}>
                       <div className="post_header">
                         <Link to={``}>
-                          <img
-                            className="post_image_profile_user"
-                            src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
-                            alt=""
-                          />
+
+                          {article.user[0].avatar ? (
+                            <>
+                              <img
+                                className="post_image_profile_user"
+                                src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
+                                alt=""
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <img
+                                className="post_image_profile_user"
+                                src={`${article.user[0].picture}`}
+                                alt=""
+                              />
+                            </>
+                          )}
+
                           <div className="us">
                             <span>
                               {article.user[0].username}{" "}

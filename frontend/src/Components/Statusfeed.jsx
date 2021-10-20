@@ -286,11 +286,24 @@ class Statusfeed extends React.Component {
                   <div className="card_container">
                     <div className="post_header">
                       <Link to={`/u/${author.username}`}>
-                        <img
-                          className="post_image_profile_user"
-                          src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
-                          alt=""
-                        />
+                        {authorAvatar ? (
+                          <>
+                            <img
+                              className="post_image_profile_user"
+                              src={`${process.env.REACT_APP_APIURI}${authorAvatar.url}`}
+                              alt=""
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              className="post_image_profile_user"
+                              src={`${article.user[0].picture}`}
+                              alt=""
+                            />
+                          </>
+                        )}
+
                         <div className="us">
                           <span>
                             {author.username}{' '}
@@ -357,11 +370,24 @@ class Statusfeed extends React.Component {
 
                             <div className="post_header">
                               <Link to={`/u/${comments.users[0].username}`}>
-                                <img
-                                  className="post_image_profile_user"
-                                  src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                  alt=""
-                                />
+                                {comments.users[0].avatar ? (
+                                  <>
+                                    <img
+                                      className="post_image_profile_user"
+                                      src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                      alt=""
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <img
+                                      className="post_image_profile_user"
+                                      src={`${comments.users[0].picture}`}
+                                      alt=""
+                                    />
+                                  </>
+                                )}
+
                                 <div className="us">
                                   <span>
                                     {comments.users[0].username}{' '}
@@ -400,11 +426,23 @@ class Statusfeed extends React.Component {
                           <div className="card_container">
                             <div className="post_header">
                               <Link to={`/u/${comments.users[0].username}`}>
-                                <img
-                                  className="post_image_profile_user"
-                                  src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
-                                  alt=""
-                                />
+                                {comments.users[0].avatar ? (
+                                  <>
+                                    <img
+                                      className="post_image_profile_user"
+                                      src={`${process.env.REACT_APP_APIURI}${comments.users[0].avatar.url}`}
+                                      alt=""
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <img
+                                      className="post_image_profile_user"
+                                      src={`${comments.users[0].picture}`}
+                                      alt=""
+                                    />
+                                  </>
+                                )}
                                 <div className="us">
                                   <span>
                                     {comments.users[0].username}{' '}

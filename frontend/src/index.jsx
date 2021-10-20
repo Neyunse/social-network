@@ -33,7 +33,11 @@ i18next.
 
     debug: false
   });
-
+const AuthSettings = {
+  domain: process.env.REACT_APP_AUTH0_DOMAIN,
+  clientid: process.env.REACT_APP_AUTH0_CLIENT_ID,
+  redirectUri: 'http://localhost:1337/connect/auth0/callback?code_verifier=',
+}
 ReactDOM.render(
   <BrowserRouter path="/">
     <I18nextProvider i18n={i18next}>

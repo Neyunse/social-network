@@ -9,7 +9,7 @@ import TrashICon from "assets/icons/trash";
 import { Notify } from "notiflix";
 import CommentsIcon from "assets/icons/comments";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt,  faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import 'moment/locale/fr';
 import 'moment/locale/es';
 let source;
@@ -148,8 +148,8 @@ class Publicfeed extends React.Component {
       }
     );
     this.setState({
-      avatar: res.data[0].avatar.url,
-      banner: res.data[0].banner.url,
+      avatar: res.data[0].avatar ? process.env.REACT_APP_APIURI + res.data[0].avatar.url : res.data[0].picture,
+      banner: res.data[0].banner ? process.env.REACT_APP_APIURI + res.data[0].banner.url : "https://images.squarespace-cdn.com/content/v1/5aaa042ab27e39d1bff9feb7/1522214250417-5CR04L9W9PABPQVBYJ97/bg-banner-blue.png",
       verified: res.data[0].verified,
       bio: res.data[0].biografia,
       User_id: res.data[0].user_id,
@@ -235,7 +235,7 @@ class Publicfeed extends React.Component {
 
     return (
       <>
-      <div className={this.state.scroll ? `add_title pos_fixed` : "add_title"}>
+        <div className={this.state.scroll ? `add_title pos_fixed` : "add_title"}>
           <div className="in_line_flex">
             <NavLink to="/home" exact><span><FontAwesomeIcon icon={faArrowLeft} className="return" /></span></NavLink> <span><b>Post</b></span>
           </div>
@@ -249,10 +249,10 @@ class Publicfeed extends React.Component {
                   <a target="_blank" href={`https://www.patreon.com/bePatron?u=${this.state.patreonID}`}>Become a Patron!</a>
                 </div>
               ) : null}
-              <img src={`${process.env.REACT_APP_APIURI}${this.state.banner}`} alt="" />
+              <img src={`${this.state.banner}`} alt="" />
             </div>
             <div className="avatar">
-              <img src={`${process.env.REACT_APP_APIURI}${this.state.avatar}`} alt="" />
+              <img src={`${this.state.avatar}`} alt="" />
             </div>
             <br /><br />
             <div className="desc">
@@ -287,11 +287,23 @@ class Publicfeed extends React.Component {
                         <div className="card_container" onClick={() => this.RedirectPost(article.user[0].username, article.id)}>
                           <div className="post_header">
                             <Link to={``}>
-                              <img
-                                className="post_image_profile_user"
-                                src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
-                                alt=""
-                              />
+                              {article.user[0].avatar ? (
+                                <>
+                                  <img
+                                    className="post_image_profile_user"
+                                    src={`${process.env.REACT_APP_APIURI}${article.user[0].avatar.url}`}
+                                    alt=""
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    className="post_image_profile_user"
+                                    src={`${article.user[0].picture}`}
+                                    alt=""
+                                  />
+                                </>
+                              )}
                               <div className="us">
                                 <span>
                                   {article.user[0].username}{" "}
