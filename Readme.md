@@ -30,6 +30,8 @@ Then click the save button and confirm the changes... then create a user and tha
 #### New settings
 
 It is now necessary to activate in the public role the access to `find` avatars.
+http://localhost:1337/admin/settings/users-permissions/roles/2
+
 You also need to set up strapi with Auth0.
 
 You also need to configure strapi with Auth0, but you don't need to make changes to the frontend to integrate it, as I have configured most of the integration.
