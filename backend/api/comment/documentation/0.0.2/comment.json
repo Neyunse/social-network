@@ -535,7 +535,8 @@
             "items": {
               "required": [
                 "id",
-                "body"
+                "body",
+                "mgs"
               ],
               "properties": {
                 "id": {
@@ -543,9 +544,6 @@
                 },
                 "body": {
                   "type": "string"
-                },
-                "mg": {
-                  "type": "integer"
                 },
                 "user": {
                   "type": "array",
@@ -558,6 +556,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "mgs": {
+                  "type": "integer"
                 },
                 "created_by": {
                   "type": "string"
@@ -574,7 +575,8 @@
               "required": [
                 "id",
                 "username",
-                "email"
+                "email",
+                "name"
               ],
               "properties": {
                 "id": {
@@ -636,6 +638,9 @@
                 },
                 "picture": {
                   "type": "string"
+                },
+                "name": {
+                  "type": "uid"
                 },
                 "created_by": {
                   "type": "string"

@@ -101,6 +101,12 @@
     },
     "picture": {
       "type": "string"
+    },
+    "name": {
+      "type": "uid",
+      "targetField": "username",
+      "required": true,
+      "maxLength": 25
     }
   }
 }

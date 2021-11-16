@@ -17,10 +17,6 @@
       "maxLength": 280,
       "required": true
     },
-    "mg": {
-      "type": "integer",
-      "default": 0
-    },
     "user": {
       "via": "posts",
       "plugin": "users-permissions",
@@ -30,6 +26,11 @@
     "comments": {
       "via": "posts",
       "collection": "comment"
+    },
+    "mgs": {
+      "type": "integer",
+      "default": 0,
+      "required": true
     }
   }
 }

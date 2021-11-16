@@ -517,7 +517,8 @@
       "Post": {
         "required": [
           "id",
-          "body"
+          "body",
+          "mgs"
         ],
         "properties": {
           "id": {
@@ -527,17 +528,14 @@
             "type": "string",
             "maxLength": 280
           },
-          "mg": {
-            "type": "integer",
-            "default": 0
-          },
           "user": {
             "type": "array",
             "items": {
               "required": [
                 "id",
                 "username",
-                "email"
+                "email",
+                "name"
               ],
               "properties": {
                 "id": {
@@ -600,6 +598,9 @@
                 "picture": {
                   "type": "string"
                 },
+                "name": {
+                  "type": "uid"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -648,21 +649,22 @@
                 }
               }
             }
+          },
+          "mgs": {
+            "type": "integer",
+            "default": 0
           }
         }
       },
       "NewPost": {
         "required": [
-          "body"
+          "body",
+          "mgs"
         ],
         "properties": {
           "body": {
             "type": "string",
             "maxLength": 280
-          },
-          "mg": {
-            "type": "integer",
-            "default": 0
           },
           "user": {
             "type": "array",
@@ -675,6 +677,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "mgs": {
+            "type": "integer",
+            "default": 0
           },
           "created_by": {
             "type": "string"

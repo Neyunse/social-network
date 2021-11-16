@@ -22,8 +22,8 @@
       "default": 0
     },
     "posts": {
-      "collection": "post",
       "via": "comments",
+      "collection": "post",
       "dominant": true
     },
     "users": {
