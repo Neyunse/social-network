@@ -1,0 +1,56 @@
+$text-color: #fff;
+$cards-bg: #313131;
+$border-color: #424546;
+.form {
+  border-bottom: 1px solid $border-color;
+  height: auto;
+  padding-bottom: 17px;
+}
+
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 1em;
+  background: $cards-bg;
+  max-height: 100px;
+  height: auto;
+  color: $text-color;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 100%;
+  padding-bottom: 3px;
+  border-bottom: 1px solid $border-color;
+  color: $text-color;
+}
+.submit {
+  padding: 7px;
+  padding-right: 7px;
+  padding-left: 7px;
+  background: rgb(240, 29, 158);
+  color: white;
+  border: 0px;
+  border-radius: 20px;
+  font-weight: 400;
+  padding-left: 17px;
+  padding-right: 19px;
+  display: block;
+  position: relative;
+  float: right;
+  right: 14px;
+  margin-top: 5px;
+  transition: all 1s ease;
+  user-select: none;
+}
+.disabled {
+  opacity: 0.5;
+}
+.disabled:hover {
+  cursor: default!important;
+}
+.submit:hover {
+  background: rgba(240, 29, 158, 0.76);
+  cursor: pointer;
+}

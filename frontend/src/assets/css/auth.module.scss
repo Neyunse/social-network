@@ -1,0 +1,48 @@
+.left_panel {
+  background-image: url('https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png');
+  background-size: cover;
+  width: calc(100% - 618px);
+  height: 100vh;
+  display: block;
+}
+.right_panel > form {
+    margin: 172px 124px;
+}
+.right_panel > form > h1{
+    color: #fff;
+}
+.right_panel > form > div[class*="input_name"],div[class*="input_pass"] {
+  margin-bottom: 10px;
+  background-color: white;
+  display: flex;
+  border-radius: 20px;
+  padding: 10px;
+  overflow: hidden;
+}
+.right_panel > form > div > label {
+  margin-right: 9px;
+  margin-left: 5px;
+}
+.right_panel > form > div > input {
+  width: 100%;
+  outline: none;
+  background: transparent;
+  border: 0px;
+}
+
+.login > input[type='submit'] {
+  margin-bottom: 10px;
+
+  display: flex;
+  border-radius: 20px;
+  padding: 10px;
+  overflow: hidden;
+  color: #fff;
+  background: rgb(240, 29, 158);
+  transition: all 1s ease;
+}
+
+.login> input[type='submit']:hover {
+    background: rgba(240, 29, 158, 0.76);
+    cursor: pointer;
+  }

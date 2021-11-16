@@ -1,39 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from "react-router-dom";
-import UserNav from "Components/usernav";
-import TopNav from './TopNav';
 import moment from "moment";
+import { common, navv, timeline } from 'assets/css'
 
+import Search from 'components/search';
+import Users from 'components/search/users';
+import UserCard from 'components/userCard';
 function Container(props) {
   const { children } = props;
+
   moment.locale(localStorage.getItem('i18nextLng')); // localStorage.getItem('i18nextLng')
   return (
     <>
-      <TopNav />
-      <div className="navegation main">
-        <div className="nav">
-          <UserNav />
-          <nav>
-            <ul>
-              <li>
-                <NavLink to="/home" exact>Home</NavLink>
-              </li>
+    <div className={common.row + " " + common.layout}>
+        <div className={common.column + " " + common.header}>
+          <div className="nav">
+            <div className={navv.card}>
+              <UserCard userID="7" />
+              <div className={navv.card_nav}>
+                <nav>
+                  <ul>
+                    <li>
+                      <NavLink to="/home">Home</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to={`/profile/${sessionStorage.getItem('username')}`}>Profile</NavLink>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
 
-              <li>
-                <NavLink to={`/u/${localStorage.getItem("username")}`} exact>Profile</NavLink>
-              </li>
-            </ul>
-          </nav>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="page_container main">
-        <div className="content">{children}</div>
-      </div>
-      <div className="aside_side main">
-        <div className="side">
-          <h3>Official News</h3>
-        </div>
+        <main className={common.column + " " + common.main_col}>
+          <div className={common.row}>
+            <div className={common.column + " " + timeline.timeline}>
+              {children}
+            </div>
+            <aside className={common.column}>
+              <Search users={Users} />
+            </aside>
+          </div>
+        </main>
       </div>
     </>
   );

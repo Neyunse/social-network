@@ -1,0 +1,88 @@
+$text-color: #fff;
+$cards-bg: #313131;
+$border-color: #424546;
+$border-color-f: #1e1e1f;
+
+.timeline {
+  width: 600px;
+  background-color: $cards-bg;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 0px;
+  height: auto;
+  max-width: 600px;
+}
+
+.timeline_title {
+  border-bottom: 1px solid $border-color;
+  position: relative;
+  background: $cards-bg;
+  width: inherit;
+  border-radius: 13px 13px 0px 0px;
+  top: 0px;
+  z-index: 9;
+  color: $text-color;
+}
+.fixed {
+  position: fixed;
+  z-index: 9;
+  border-bottom: 1px solid $border-color-f;
+}
+.timeline_title > h3 {
+  margin: 7px 12px 5px;
+  font-size: 20px;
+}
+
+.timeline_article {
+  padding: 10px;
+  transition: all 1s;
+  border-bottom: 1px solid $border-color;
+}
+.timeline_article:hover {
+  cursor: pointer;
+}
+.a_header {
+  display: flex;
+  text-decoration: none;
+}
+.a_header_img {
+  width: 53px;
+  overflow: hidden;
+  border-radius: 50px;
+  height: 53px;
+}
+.a_header_img > img {
+  width: 100%;
+  height: 100%;
+}
+.a_header_info {
+  padding: 8px;
+  color: $text-color;
+}
+.a_header_info:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.a_body {
+  margin: -38px auto auto 62px;
+  color: $text-color;
+}
+.a_footer {
+  margin: 0px auto auto 62px;
+
+  padding-top: 12px;
+  border-top: 1px solid $border-color;
+}
+.a_footer>div[class^="heart"] {
+  color: rgb(24, 186, 249);
+}
+
+.a_body > div > p > iframe {
+  width: 100%;
+  height: 291px;
+  border-radius: 12px;
+}
+.a_body > div > p > img {
+  width: 100%;
+  border-radius: 12px;
+}
