@@ -37,8 +37,8 @@ class Auth extends React.Component {
         e.preventDefault();
         this.setState({ onLogin: true });
         await axios.post('http://localhost:1337/auth/local', {
-            identifier: "Neyunse",
-            password: "Armadox1213"
+            identifier: "",
+            password: ""
         }).then(res => res.data).then(data => {
             console.log(data);
             localStorage.setItem('jwt', data.jwt);
