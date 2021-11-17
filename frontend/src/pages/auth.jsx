@@ -64,7 +64,7 @@ class Auth extends React.Component {
                 </div>
                 <div className={common.column + " " + auth.right_panel}>
                     <form autoComplete={false} onSubmit={(e) => this.Login(e)}>
-                        <h1>Login</h1>
+                        <h1>Login to the community</h1>
                         <div className="input_name">
                             <label htmlFor="name"><i className="fas fa-user" /></label>
                             <input type="text" name="" id="name" />
