@@ -30,6 +30,9 @@ Then click on the save button and confirm the changes... then create a user in t
 
 http://localhost:1337/admin/plugins/content-manager/collectionType/plugins::users-permissions.user?page=1&pageSize=10&_sort=username:ASC 
 
+## Extra
+
+configure your imagekit credentials in the `env` file located in `./backend`
 
 ## START
 
