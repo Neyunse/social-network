@@ -37,6 +37,7 @@ class Auth extends React.Component {
         e.preventDefault();
         this.setState({ onLogin: true });
         await axios.post('http://localhost:1337/auth/local', {
+            // add your strapi login data
             identifier: "",
             password: ""
         }).then(res => res.data).then(data => {
