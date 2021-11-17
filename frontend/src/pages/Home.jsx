@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { timeline } from 'assets/css'
 import TextInput from 'components/PostInput';
 import PublicTimeline from 'components/Timeline';
+import { Redirect } from 'react-router-dom';
 
 function Home() {
     const [scroll, setScroll] = useState(false);
@@ -26,6 +27,7 @@ function Home() {
         [scroll],
       )
 
+    
 
 
 

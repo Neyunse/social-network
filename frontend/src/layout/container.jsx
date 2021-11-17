@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from "react-router-dom";
+import { NavLink,Redirect } from "react-router-dom";
 import moment from "moment";
 import { common, navv, timeline } from 'assets/css'
 
 import Search from 'components/search';
 import Users from 'components/search/users';
 import UserCard from 'components/userCard';
+
+
 function Container(props) {
   const { children } = props;
 
-  moment.locale(localStorage.getItem('i18nextLng')); // localStorage.getItem('i18nextLng')
+  moment.locale('es'); // localStorage.getItem('i18nextLng')
+
   return (
     <>
     <div className={common.row + " " + common.layout}>

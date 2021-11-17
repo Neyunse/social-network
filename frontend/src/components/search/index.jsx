@@ -8,9 +8,13 @@ function search({ users }) {
     function handleChange(e) {
         setLiveSearch(e.target.value);
     }
+
+    function ClearInput(){
+        setLiveSearch('')
+    }
     return (
         <div className={aside.search_box}>
-            <input type="text" onChange={(e) => handleChange(e)} placeholder="Search users" maxLength={20} />
+            <input value={LiveSearch} type="text" onChange={(e) => handleChange(e)} placeholder="Search users" maxLength={20} />
             {LiveSearch.length > 0 ? (
                 <div className={aside.result}>
                     <ul>
@@ -19,7 +23,7 @@ function search({ users }) {
                             .map(user => (
                                 <>
                                     <li className={aside.result_item} key={user.id}>
-                                        <NavLink to={`/profile/${user.name}`} className={aside.result_link}>
+                                        <NavLink onClick={()=>ClearInput()} to={`/profile/${user.name}`} className={aside.result_link}>
                                             <div className={aside.result_item_avatar}>
                                                 <img src={user.avatar} alt="" />
                                             </div>

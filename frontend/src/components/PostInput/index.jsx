@@ -18,6 +18,8 @@ class TextInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            type: props.type,
+            postID: props.postID,
             editorState: EditorState.createEmpty(),
             suggestions: mentions,
             MAX_LENGTH: 200,
@@ -32,6 +34,7 @@ class TextInput extends React.Component {
         this.setState({ editorState });
 
         const currentContent = this.state.editorState.getCurrentContent();
+     
         const currentContentLength = currentContent.getPlainText('').length;
 
         if (currentContentLength > 0 && currentContentLength <= this.state.MAX_LENGTH) {
@@ -131,59 +134,98 @@ class TextInput extends React.Component {
 
     OnSubmit = async (e) => {
         e.preventDefault();
-        await axios.post(`${process.env.REACT_APP_APIURI}/posts`, {
-            body: this.state.editorState.getCurrentContent().getPlainText(''),
-            user: {
-                id: 7,
-            }
-        })
+        const markdown = stateToMarkdown(
+            this.state.editorState.getCurrentContent()
+        )
+        
+        if (this.state.type === "reply") {
+            await axios.post(`${process.env.REACT_APP_APIURI}/comments`, {
+                body: markdown,
+                users: {
+                    id: sessionStorage.getItem("userID"),
+                },
+                posts: {
+                    id: this.props.postID
+                }
+            })
+
+        } else {
+            await axios.post(`${process.env.REACT_APP_APIURI}/posts`, {
+                body: markdown,
+                user: {
+                    id: 7,
+                }
+            })
+        }
         await this.setState({ editorState: EditorState.createEmpty() })
         window.location.reload()
     }
 
-    insertImage = (url) => {
-        const contentState = this.state.editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity(
-            'IMAGE',
-            'IMMUTABLE',
-            { src: url })
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(this.state.editorState, { currentContent: contentStateWithEntity });
-        this.onChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ''))
-    };
-
     render() {
         const { MentionSuggestions } = this.mentionPlugin;
-        const { ImageAdd } = this.imagePlugin;
+
         const plugins = [this.mentionPlugin, this.linkifyPlugin, this.imagePlugin];
 
         return (
             <>
-                <form className={editorStyles.form} onSubmit={(e) => this.OnSubmit(e)} >
+                <form className={editorStyles.form} >
                     <div className={editorStyles.editor}>
-                        <Editor
-                            placeholder="Write your post here..."
-                            editorState={this.state.editorState}
-                            onChange={this.onChange}
-                            plugins={plugins}
-                            handleBeforeInput={this._handleBeforeInput}
-                            handlePastedText={this._handlePastedText}
-                            handlePastedFiles={this._handlePastedFiles}
-                        />
+                        {this.state.type === "reply" ? (
+                            <>
+                                <Editor
+                                    placeholder="Write your reply here..."
+                                    editorState={this.state.editorState}
+                                    onChange={this.onChange}
+                                    plugins={plugins}
+                                    handleBeforeInput={this._handleBeforeInput}
+                                    handlePastedText={this._handlePastedText}
+                                    handlePastedFiles={this._handlePastedFiles}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Editor
+                                    placeholder="Write your post here..."
+                                    editorState={this.state.editorState}
+                                    onChange={this.onChange}
+                                    plugins={plugins}
+                                    handleBeforeInput={this._handleBeforeInput}
+                                    handlePastedText={this._handlePastedText}
+                                    handlePastedFiles={this._handlePastedFiles}
+                                />
+                            </>
+                        )}
+
                         <MentionSuggestions
                             onSearchChange={this.onSearchChange}
                             suggestions={this.state.suggestions}
                         />
-                        
 
-                        {this.state.disabledbtn ? (
+                        {this.state.type === "reply" ? (
                             <>
-                                <div className={editorStyles.submit + " " + editorStyles.disabled}>Post</div>
+                                {this.state.disabledbtn ? (
+                                    <>
+                                        <div className={editorStyles.submit + " " + editorStyles.disabled}>Reply</div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <input type="submit" className={editorStyles.submit} value="Reply" />
+                                    </>)}
                             </>
                         ) : (
                             <>
-                                <input type="submit" className={editorStyles.submit} value="Post" />
+                                {this.state.disabledbtn ? (
+                                    <>
+                                        <div className={editorStyles.submit + " " + editorStyles.disabled}>Post</div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <input type="submit" onClick={(e) => this.OnSubmit(e)} className={editorStyles.submit} value="Post" />
+                                    </>
+                                )}
                             </>)}
+
+
                     </div>
 
 

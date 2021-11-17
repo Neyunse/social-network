@@ -42,10 +42,10 @@ class MarkDown extends React.Component {
         //this.setState({ text: this.props.string.replace(video[0], ) });
 
         //
-      } else if (/(https?:\/\/.*\.(?:png|jpg))/i.test(this.props.string)) {
+      } else if (/(https?:\/\/.*\.(?:png|jpg|gif|.))/i.test(this.props.string)) {
         // if this.props.string return a youtube link then we need to parse it and return a embeded video.
         var str = this.props.string;
-        var pattern = /(https?:\/\/.*\.(?:png|jpg))/i
+        var pattern = /(https?:\/\/.*\.(?:png|jpg|gif))/i
         var image = str.match(pattern);
         var embed = `<img src="${image[0]}" alt="image" />`
         var deluri = this.props.string.replace(/(?:https?|ftp):\/\/[\n\S]+/g, "")

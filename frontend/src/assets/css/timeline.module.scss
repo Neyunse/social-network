@@ -59,7 +59,13 @@ $border-color-f: #1e1e1f;
   padding: 8px;
   color: $text-color;
 }
-.a_header_info:hover {
+
+.a_header_info>a{
+  text-decoration: none;
+  color: $text-color;
+}
+
+.a_header_info>a:hover {
   color: #fff;
   text-decoration: underline;
 }
@@ -73,9 +79,19 @@ $border-color-f: #1e1e1f;
   padding-top: 12px;
   border-top: 1px solid $border-color;
 }
-.a_footer>div[class^="heart"] {
-  color: rgb(24, 186, 249);
+.icons{
+  display: flex;
 }
+
+.icons>div[class^="heart"] {
+  color: #f01d9e;
+  margin-right: 10px;
+}
+.icons>div[class^="comments"]{
+  color: #739ddf;
+  margin-right: 10px;
+}
+
 
 .a_body > div > p > iframe {
   width: 100%;

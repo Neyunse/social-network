@@ -6,12 +6,13 @@
   display: block;
 }
 .right_panel > form {
-    margin: 172px 124px;
+  margin: 172px 124px;
 }
-.right_panel > form > h1{
-    color: #fff;
+.right_panel > form > h1 {
+  color: #fff;
 }
-.right_panel > form > div[class*="input_name"],div[class*="input_pass"] {
+.right_panel > form > div[class*='input_name'],
+div[class*='input_pass'] {
   margin-bottom: 10px;
   background-color: white;
   display: flex;
@@ -42,7 +43,19 @@
   transition: all 1s ease;
 }
 
-.login> input[type='submit']:hover {
-    background: rgba(240, 29, 158, 0.76);
-    cursor: pointer;
-  }
+.login > input[type='submit']:hover {
+  background: rgba(240, 29, 158, 0.76);
+  cursor: pointer;
+}
+
+.img_content {
+  content: '';
+  background: #212222;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+.img_content>img{
+  margin: 118px 135px auto;
+}

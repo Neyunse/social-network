@@ -1,12 +1,13 @@
 import React from 'react';
 import { common, auth } from 'assets/css'
 import axios from 'axios';
+import world from 'assets/img/undraw_social_interaction_re_dyjh.svg'
 
 class Auth extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')),
+            isLoggedIn: false || JSON.parse(localStorage.getItem('isLoggedIn')),
             onLogin: false,
         };
     }
@@ -40,8 +41,9 @@ class Auth extends React.Component {
             password: "Armadox1213"
         }).then(res => res.data).then(data => {
             console.log(data);
-            sessionStorage.setItem('jwt', data.jwt);
-            sessionStorage.setItem('username', data.user.username);
+            localStorage.setItem('jwt', data.jwt);
+            localStorage.setItem('username', data.user.username);
+            localStorage.setItem("userID", data.user.id)
             localStorage.setItem('isLoggedIn', true);
 
             this.setState({ isLoggedIn: true });
@@ -55,7 +57,11 @@ class Auth extends React.Component {
     render() {
         return (
             <div className={common.row}>
-                <div className={common.column + " " + auth.left_panel}></div>
+                <div className={common.column + " " + auth.left_panel}>
+                    <div className={auth.img_content}>
+                        <img src={world} alt="" />
+                    </div>
+                </div>
                 <div className={common.column + " " + auth.right_panel}>
                     <form autoComplete={false} onSubmit={(e) => this.Login(e)}>
                         <h1>Login</h1>
@@ -67,9 +73,16 @@ class Auth extends React.Component {
                             <label htmlFor="pass"><i className="fas fa-key" /></label>
                             <input type="password" name="" id="pass" />
                         </div>
-                        <div className={auth.login}>
-                            <input type="submit" value="Login" />
-                        </div>
+                        {this.state.onLogin ? (
+                            <div className={auth.login}>
+                                <input disabled tabIndex="0" type="submit" value="Login" />
+                            </div>
+                        ) : (
+                            <div className={auth.login}>
+                                <input type="submit" value="Login" />
+                            </div>
+                        )}
+
                     </form>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { timeline } from 'assets/css'
-import { UserTimeline } from 'components/Timeline';
-import { Redirect } from 'react-router-dom';
+import TextInput from 'components/PostInput';
+import { PostTimeline, CommentsTimeline } from 'components/Timeline';
+import { useParams, Redirect } from "react-router-dom";
 
-function Profile(props) {
 
+function Post(props) {
     const [scroll, setScroll] = useState(false);
 
     useEffect(
@@ -28,19 +28,25 @@ function Profile(props) {
         [scroll],
     )
 
- 
+
+    const { username, id } = useParams()
+
+    console.log(username, id)
 
     return (
         <>
             <div className={scroll ? timeline.timeline_title + " " + timeline.fixed : timeline.timeline_title}>
-                <div className="banner"></div>
-                <h3>{props.match.params.username}</h3>
+                <h3>Thread</h3>
             </div>
             <section>
-                <UserTimeline user={props.match.params.username} />
+                <PostTimeline username={username} postID={id} />
+            </section>
+            <TextInput type="reply" postID={id} />
+            <section>
+                <CommentsTimeline postID={id} />
             </section>
         </>
     )
 }
 
-export default Profile;
+export default Post
