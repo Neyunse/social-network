@@ -16,7 +16,7 @@ For Strapi and the frontend to work smoothly it is necessary to make some adjust
 
 The frontend uses the user's token to create new posts or reply, so it is necessary to enable the necessary permissions for authenticated users.
 Link to the role settings page:
-http://localhost:1337/admin/settings/users-permissions/roles/1
+http://localhost:1337/admin/settings/users-permissions/roles/2
 
 
 And these are the settings
