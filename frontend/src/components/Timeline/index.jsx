@@ -1,10 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { timeline } from 'assets/css'
-import moment from "moment";
-import MarkDown from "./MarkDown";
-import { NavLink } from "react-router-dom";
-
 
 import { Card } from "../CardPost";
 
