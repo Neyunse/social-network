@@ -5,6 +5,9 @@ import moment from "moment";
 import MarkDown from "./MarkDown";
 import { NavLink } from "react-router-dom";
 
+
+import { Card } from "../CardPost";
+
 class UserTimeline extends React.Component {
     constructor(props) {
         super(props);
@@ -60,52 +63,7 @@ class UserTimeline extends React.Component {
                                     {
                                         post.user[0].blocked ? null : (
                                             <>
-                                                <article data-key={post.id.toString()} className={timeline.timeline_article} onClick={() => this.PostStatus(post.user[0].username, post.id)}>
-                                                    <div className={timeline.a_header}>
-                                                        <NavLink to={`/profile/${post.user[0].username}`} className={timeline.a_header_img}>
-                                                            {post.user[0].avatar ? (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${process.env.REACT_APP_APIURI}${post.user[0].avatar.url}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${post.user[0].picture}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            )}
-                                                        </NavLink>
-                                                        <div className={timeline.a_header_info}>
-                                                            <NavLink to={`/profile/${post.user[0].username}`}>{post.user[0].username}</NavLink> <small>@{post.user[0].name} {moment(post.created_at).fromNow()}</small><br />
-                                                        </div>
-                                                    </div>
-                                                    <div className={timeline.a_body}>
-                                                        <MarkDown string={post.body} />
-                                                    </div>
-                                                    <div className={timeline.a_footer}>
-                                                        <div className={timeline.icons}>
-                                                            <div className="heart">
-                                                                <i className="fa-solid fa-heart" onClick={(e) => this.sendMG(e, data.mgs, data.id)} />
-                                                                {" "}
-                                                                <span>{post.mgs}</span>
-                                                                {" "}
-                                                            </div>
-
-                                                            <div className="comments">
-
-                                                                <i className="fa-solid fa-comment" />
-                                                                {" "}
-                                                                <span>{post.comments.length}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
+                                                <Card post={post} onClick={() => this.PostStatus(post.user[0].username, post.id)} sendMG={this.sendMG} />
                                             </>
                                         )
                                     }
@@ -175,52 +133,7 @@ class PublicTimeline extends React.Component {
                                     {
                                         post.user[0].blocked ? null : (
                                             <>
-                                                <article data-key={post.id.toString()} className={timeline.timeline_article} onClick={() => this.PostStatus(post.user[0].username, post.id)}>
-                                                    <div className={timeline.a_header}>
-                                                        <NavLink to={`/profile/${post.user[0].username}`} className={timeline.a_header_img}>
-                                                            {post.user[0].avatar ? (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${process.env.REACT_APP_APIURI}${post.user[0].avatar.url}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${post.user[0].picture}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            )}
-                                                        </NavLink>
-                                                        <div className={timeline.a_header_info}>
-                                                            <NavLink to={`/profile/${post.user[0].username}`}>{post.user[0].username}</NavLink> <small>@{post.user[0].name} {moment(post.created_at).fromNow()}</small><br />
-                                                        </div>
-                                                    </div>
-                                                    <div className={timeline.a_body}>
-                                                        <MarkDown string={post.body} />
-                                                    </div>
-                                                    <div className={timeline.a_footer}>
-                                                        <div className={timeline.icons}>
-                                                            <div className="heart">
-                                                                <i className="fa-solid fa-heart" onClick={(e) => this.sendMG(e, data.mgs, data.id)} />
-                                                                {" "}
-                                                                <span>{post.mgs}</span>
-                                                                {" "}
-                                                            </div>
-
-                                                            <div className="comments">
-
-                                                                <i className="fa-solid fa-comment" />
-                                                                {" "}
-                                                                <span>{post.comments.length}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
+                                                <Card post={post} onClick={() => this.PostStatus(post.user[0].username, post.id)} sendMG={this.sendMG} />
                                             </>
                                         )
                                     }
@@ -245,7 +158,7 @@ class PostTimeline extends React.Component {
         this.state = {
             user: props.username,
             pID: props.postID,
-            data: [],
+            post: [],
             userD: [],
             isLoading: true,
         };
@@ -257,7 +170,7 @@ class PostTimeline extends React.Component {
             .then(data => {
 
                 this.setState({
-                    data: data,
+                    post: data,
                     isLoading: false
                 })
             })
@@ -283,66 +196,19 @@ class PostTimeline extends React.Component {
     }
 
     render() {
-        const { data, isLoading, userD } = this.state;
+        const { post, isLoading, userD } = this.state;
 
-        console.log(data)
-
+    
         return (
             <>
                 {isLoading ? null : (
                     <>
-                        {data.user.length > 0 ? (
+                        {post.user.length > 0 ? (
                             <>
                                 {
-                                    data.user[0].blocked ? null : (
+                                    post.user[0].blocked ? null : (
                                         <>
-                                            <article data-key={data.id.toString()} className={timeline.timeline_article} onClick={(e) => console.log('clic')}>
-                                                <div className={timeline.a_header}>
-                                                    <NavLink to={`/profile/${data.user[0].username}`} className={timeline.a_header_img}>
-                                                        {data.user[0].avatar ? (
-                                                            <>
-                                                                <img
-                                                                    className="post_image_profile_user"
-                                                                    src={`${process.env.REACT_APP_APIURI}${data.user[0].avatar.url}`}
-                                                                    alt=""
-                                                                />
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <img
-                                                                    className="post_image_profile_user"
-                                                                    src={`${data.user[0].picture}`}
-                                                                    alt=""
-                                                                />
-                                                            </>
-                                                        )}
-                                                    </NavLink>
-                                                    <div className={timeline.a_header_info}>
-                                                        <NavLink to={`/profile/${data.user[0].username}`}>{data.user[0].username}</NavLink> <small>@{data.user[0].name} {moment(data.created_at).fromNow()}</small><br />
-                                                    </div>
-                                                </div>
-                                                <div className={timeline.a_body}>
-                                                    <MarkDown string={data.body} />
-                                                </div>
-                                                <div className={timeline.a_footer}>
-                                                    <div className={timeline.icons}>
-                                                        <div className="heart">
-                                                            <i className="fa-solid fa-heart" onClick={(e) => this.sendMG(e, data.mgs, data.id)} />
-                                                            {" "}
-                                                            <span>{data.mgs}</span>
-                                                            {" "}
-                                                        </div>
-
-                                                        <div className="comments">
-
-                                                            <i className="fa-solid fa-comment" />
-                                                            {" "}
-                                                            <span>{data.comments.length}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-
+                                            <Card post={post} sendMG={this.sendMG} />
                                         </>
                                     )
                                 }
@@ -414,45 +280,7 @@ class CommentsTimeline extends React.Component {
                                     {
                                         post.users[0].blocked ? null : (
                                             <>
-                                                <article data-key={post.id.toString()} className={timeline.timeline_article} onClick={(e) => console.log('clic')}>
-                                                    <div className={timeline.a_header}>
-                                                        <NavLink to={`/profile/${post.users[0].username}`} className={timeline.a_header_img}>
-                                                            {post.users[0].avatar ? (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${process.env.REACT_APP_APIURI}${post.users[0].avatar.url}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <img
-                                                                        className="post_image_profile_user"
-                                                                        src={`${post.users[0].picture}`}
-                                                                        alt=""
-                                                                    />
-                                                                </>
-                                                            )}
-                                                        </NavLink>
-                                                        <div className={timeline.a_header_info}>
-                                                            <NavLink to={`/profile/${post.users[0].username}`}>{post.users[0].username}</NavLink> <small>@{post.users[0].name} {moment(post.created_at).fromNow()}</small><br />
-                                                        </div>
-                                                    </div>
-                                                    <div className={timeline.a_body}>
-                                                        <MarkDown string={post.body} />
-                                                    </div>
-                                                    <div className={timeline.a_footer}>
-                                                        <div className={timeline.icons}>
-                                                            <div className="heart">
-                                                                <i className="fa-solid fa-heart" onClick={(e) => this.sendMG(e, post.mg, post.id)} />
-                                                                {" "}
-                                                                <span>{post.mg}</span>
-                                                                {" "}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </article>
+                                                <Card post={post} sendMG={this.sendMG} />
                                             </>
                                         )
                                     }
