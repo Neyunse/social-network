@@ -7,7 +7,8 @@
     "dev": "strapi build && strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "upd": "yarn upgrade --latest"
   },
   "devDependencies": {},
   "dependencies": {
@@ -35,10 +36,6 @@
   },
   "strapi": {
     "uuid": "ba59b23c-8c06-41f9-8842-0fc070cb08ee"
-  },
-  "engines": {
-    "node": ">=10.16.0 <=14.x.x",
-    "npm": "^6.0.0"
   },
   "license": "MIT"
 }
