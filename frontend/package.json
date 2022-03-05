@@ -32,7 +32,7 @@
     "markdown-it": "^12.2.0",
     "moment": "^2.29.1",
     "moment-with-locales-es6": "^1.0.1",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "notiflix": "^3.2.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
