@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "strapi build && strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
+    "build": "strapi build --clean",
     "strapi": "strapi",
+    "postinstall": "npm run build",
     "upd": "yarn upgrade --latest"
   },
   "devDependencies": {},
