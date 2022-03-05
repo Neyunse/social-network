@@ -16,7 +16,7 @@ For Strapi and the frontend to work smoothly it is necessary to make some adjust
 
 The frontend uses the user's token to create new posts or reply, so it is necessary to enable the necessary permissions for authenticated users.
 Link to the role settings page:
-http://localhost:1337/admin/settings/users-permissions/roles/1
+http://localhost:1337/admin/settings/users-permissions/roles/2
 
 
 And these are the settings
@@ -30,6 +30,12 @@ Then click on the save button and confirm the changes... then create a user in t
 
 http://localhost:1337/admin/plugins/content-manager/collectionType/plugins::users-permissions.user?page=1&pageSize=10&_sort=username:ASC 
 
+
+configure your imagekit credentials in the `env` file located in `./backend`
+
+## Frontend Settings
+
+configure your login crecredentials in `./frontend/src/pages/auth.jsx:40` (First configure strapi Backend and add the user)
 
 ## START
 

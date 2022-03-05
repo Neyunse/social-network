@@ -37,8 +37,9 @@ class Auth extends React.Component {
         e.preventDefault();
         this.setState({ onLogin: true });
         await axios.post('http://localhost:1337/auth/local', {
-            identifier: "Neyunse",
-            password: "Armadox1213"
+            // add your strapi login data
+            identifier: "",
+            password: ""
         }).then(res => res.data).then(data => {
             console.log(data);
             localStorage.setItem('jwt', data.jwt);
@@ -64,7 +65,7 @@ class Auth extends React.Component {
                 </div>
                 <div className={common.column + " " + auth.right_panel}>
                     <form autoComplete={false} onSubmit={(e) => this.Login(e)}>
-                        <h1>Login</h1>
+                        <h1>Login to the community</h1>
                         <div className="input_name">
                             <label htmlFor="name"><i className="fas fa-user" /></label>
                             <input type="text" name="" id="name" />

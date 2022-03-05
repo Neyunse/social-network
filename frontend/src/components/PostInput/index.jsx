@@ -142,7 +142,7 @@ class TextInput extends React.Component {
             await axios.post(`${process.env.REACT_APP_APIURI}/comments`, {
                 body: markdown,
                 users: {
-                    id: sessionStorage.getItem("userID"),
+                    id: localStorage.getItem("userID"),
                 },
                 posts: {
                     id: this.props.postID
